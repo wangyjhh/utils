@@ -1,6 +1,7 @@
 export * from './createMockAsyncTask'
 export * from './darkenHexColor'
 export * from './debounce'
+export * from './getDate'
 export * from './lightenHexColor'
 export * from './retry'
 export * from './throttle'
