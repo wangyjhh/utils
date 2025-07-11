@@ -1,27 +1,32 @@
 /**
  * @function 返回当前或当前偏移量的格式化日期时间
+ * @param {string} format 格式
  * @param {number} offsetSec 偏移秒数
  * @returns {string} 格式化日期时间
  */
-export const getFormatDate = (offsetSec: number = 0) => {
-    // 获取当前时间戳
-    let timestamp = Date.now()
-    // 加上或减去偏移量
-    timestamp += offsetSec * 1000 // 注意：offsetSec 是秒，所以乘以 1000 转换为毫秒
+export const getFormatDate = (
+    format: string = 'YYYY-MM-DD hh:mm:ss',
+    offsetSec: number = 0,
+) => {
+    // 计算目标时间戳
+    const timestamp = Date.now() + offsetSec * 1000
+    const date = new Date(timestamp)
 
-    // 创建新的 Date 对象
-    const newDate = new Date(timestamp)
+    // 提取日期各部分并补零
+    const parts = {
+        YYYY: String(date.getFullYear()),
+        MM: String(date.getMonth() + 1).padStart(2, '0'),
+        DD: String(date.getDate()).padStart(2, '0'),
+        hh: String(date.getHours()).padStart(2, '0'),
+        mm: String(date.getMinutes()).padStart(2, '0'),
+        ss: String(date.getSeconds()).padStart(2, '0'),
+    }
 
-    // 格式化日期
-    const YYYY = newDate.getFullYear()
-    const MM = (newDate.getMonth() + 1).toString().padStart(2, '0')
-    const DD = newDate.getDate().toString().padStart(2, '0')
-    const h = newDate.getHours().toString().padStart(2, '0')
-    const m = newDate.getMinutes().toString().padStart(2, '0')
-    const s = newDate.getSeconds().toString().padStart(2, '0')
-
-    // 返回格式化的日期时间字符串
-    return `${YYYY}-${MM}-${DD} ${h}:${m}:${s}`
+    // 使用正则表达式全局替换占位符
+    return format.replace(
+        /YYYY|MM|DD|hh|mm|ss/g,
+        match => parts[match as keyof typeof parts],
+    )
 }
 
 /**
