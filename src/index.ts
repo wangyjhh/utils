@@ -1,4 +1,5 @@
 export * from './createMockAsyncTask'
+export * from './cryptoUtils'
 export * from './darkenHexColor'
 export * from './debounce'
 export * from './getDate'
