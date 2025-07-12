@@ -47,3 +47,7 @@ export const getMonthDate = (month?: number, year?: number) => {
     // 返回指定月份的天数
     return daysInMonth[month - 1]
 }
+
+export const getTimestamp = () => {
+    return `${Number.parseInt(`${new Date().getTime() / 1000}`)}`
+}

@@ -40,6 +40,12 @@ export function hmacSha256(secret: string, data: string, uppercase: boolean = tr
     return uppercase ? hmac.digest('hex').toUpperCase() : hmac.digest('hex')
 }
 
+export const getSign = (timestamp: string, secret: string) => {
+    const stringify = `${timestamp}\n${secret}`
+    const sign = crypto.createHmac('SHA256', stringify)
+    return sign.digest('base64')
+}
+
 /**
  * 生成带时间戳的签名（常见于API验证）
  * @param params - 请求参数对象
