@@ -1,6 +1,5 @@
 import { log } from 'node:console'
 import { describe, expect, it } from 'vitest'
-// debounce.test.ts
 import { getFormatDate, getMonthDate } from '../src'
 
 describe('debounce', () => {

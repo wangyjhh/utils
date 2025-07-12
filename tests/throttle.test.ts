@@ -1,5 +1,4 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-// throttle.test.ts
 import { throttle } from '../src'
 
 describe('throttle', () => {
@@ -64,7 +63,7 @@ describe('throttle', () => {
         // 推进到 200ms (第一次调用后200ms)
         vi.advanceTimersByTime(50) // 50+50+50+50=200
         expect(mockFn).toHaveBeenCalledTimes(2)
-        
+
         expect(mockFn).toHaveBeenCalledWith(4) // 执行最后一次调用
     })
 

@@ -1,6 +1,5 @@
 import { log } from 'node:console'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-// debounce.test.ts
 import { debounce } from '../src'
 
 describe('debounce', () => {
