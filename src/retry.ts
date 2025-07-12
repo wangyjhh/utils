@@ -15,7 +15,7 @@ export async function retry<T>(
         retryDelay: 2000,
     },
 ): Promise<T> {
-    // 合并默认选项（关键修复）
+    // 合并默认选项
     const finalOptions = {
         taskName: '异步函数',
         maxRetries: 10,
@@ -63,7 +63,7 @@ export async function retry<T>(
         }
     }
 
-    // 构建最终错误信息（修复了未定义值的问题）
+    // 构建最终错误信息
     let errorMessage = `[${finalOptions.taskName}] 失败${finalOptions.maxRetries}次。`
     if (lastError) {
         errorMessage += ` 最后一次错误: ${lastError instanceof Error ? lastError.message : String(lastError)}`

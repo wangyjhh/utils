@@ -1,12 +1,25 @@
-export const createMockAsyncTask = (successReturn: any = '调用成功!', errorReturn: any = '调用失败') => {
+interface Options {
+    mode: 'success' | 'error'
+    errorReturn: any
+    successReturn: any
+}
+
+export const createMockAsyncTask = (options: Options) => {
     let attemptCount = 0
 
     return async (successOnAttempt: number = 3) => {
         const currentAttempt = ++attemptCount
-
-        if (currentAttempt < successOnAttempt) {
-            throw new Error(errorReturn)
+        if (options.mode === 'error') {
+            if (currentAttempt < successOnAttempt) {
+                throw new Error(options.errorReturn)
+            }
+            return options.successReturn
         }
-        return successReturn
+        else if (options.mode === 'success') {
+            if (currentAttempt < successOnAttempt) {
+                return options.errorReturn
+            }
+            return options.successReturn
+        }
     }
 }
